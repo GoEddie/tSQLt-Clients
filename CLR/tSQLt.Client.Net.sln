@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tSQLt.Client.Net", "tSQLt.Client.Net\tSQLt.Client.Net.csproj", "{44629E3A-7517-4871-8457-D0359AC7F791}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0E41B368-46C2-40D2-B063-FF3435A1D1A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tSQLt.Client.Net.Tests", "Test\tSQLt.Client.Net.Tests\tSQLt.Client.Net.Tests.csproj", "{BBD2CA68-3150-46B0-9436-4751C7EA18B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{6C91908C-5C65-4E88-8377-FCC7C3ED4B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitExample", "Example\ExampleProject\NUnitExample.csproj", "{4621A54B-57DE-4D05-B8C7-8434DB39AB64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTestExample", "Example\MSTestExample\MSTestExample.csproj", "{AEA3274E-6C16-4D1A-A2DE-4BCEE199991A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{ECB40001-53DD-4224-A60F-FE4BD2E2947F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44629E3A-7517-4871-8457-D0359AC7F791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44629E3A-7517-4871-8457-D0359AC7F791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44629E3A-7517-4871-8457-D0359AC7F791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44629E3A-7517-4871-8457-D0359AC7F791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD2CA68-3150-46B0-9436-4751C7EA18B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD2CA68-3150-46B0-9436-4751C7EA18B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD2CA68-3150-46B0-9436-4751C7EA18B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD2CA68-3150-46B0-9436-4751C7EA18B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4621A54B-57DE-4D05-B8C7-8434DB39AB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4621A54B-57DE-4D05-B8C7-8434DB39AB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4621A54B-57DE-4D05-B8C7-8434DB39AB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4621A54B-57DE-4D05-B8C7-8434DB39AB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA3274E-6C16-4D1A-A2DE-4BCEE199991A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA3274E-6C16-4D1A-A2DE-4BCEE199991A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA3274E-6C16-4D1A-A2DE-4BCEE199991A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA3274E-6C16-4D1A-A2DE-4BCEE199991A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBD2CA68-3150-46B0-9436-4751C7EA18B9} = {0E41B368-46C2-40D2-B063-FF3435A1D1A9}
+		{4621A54B-57DE-4D05-B8C7-8434DB39AB64} = {6C91908C-5C65-4E88-8377-FCC7C3ED4B38}
+		{AEA3274E-6C16-4D1A-A2DE-4BCEE199991A} = {6C91908C-5C65-4E88-8377-FCC7C3ED4B38}
+	EndGlobalSection
+EndGlobal
