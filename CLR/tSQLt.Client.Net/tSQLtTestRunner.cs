@@ -14,9 +14,10 @@ namespace tSQLt.Client.Net
         /// Creates a tSQLtTestRunner which is used to run tests against a Sql Server database which contains the tests to run
         /// </summary>
         /// <param name="connectionString">The connection string including the initial catalog of the database to connect to</param>
-        public tSQLtTestRunner(string connectionString)
+        /// <param name="runTimeout">The command timeout for running the tests, defaults to 2 minutes</param>
+        public tSQLtTestRunner(string connectionString, int runTimeout = 1000 * 120)
         {
-            _gateway = new SqlServerGateway(connectionString);
+            _gateway = new SqlServerGateway(connectionString, runTimeout);
         }
 
         /// <summary>

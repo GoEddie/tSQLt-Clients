@@ -13,10 +13,12 @@ namespace tSQLt.Client.Net.Gateways
     {
         
         private readonly string _connectionString;
+        private readonly int _runTimeout;
 
-        public SqlServerGateway(string connectionString)
+        public SqlServerGateway(string connectionString, int runTimeout)
         {
             _connectionString = connectionString;
+            _runTimeout = runTimeout;
         }
 
         public void RunWithNoResult(string query)
@@ -29,6 +31,7 @@ namespace tSQLt.Client.Net.Gateways
                     using (SqlCommand cmd = con.CreateCommand())
                     {
                         cmd.CommandText = query;
+                        cmd.CommandTimeout = _runTimeout;
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -43,6 +46,8 @@ namespace tSQLt.Client.Net.Gateways
                     using (SqlCommand cmd = con.CreateCommand())
                     {
                         cmd.CommandText = query;
+                        cmd.CommandTimeout = _runTimeout;
+
                         SqlDataReader reader = cmd.ExecuteReader();
                         if (!reader.Read())
                         {
@@ -52,8 +57,7 @@ namespace tSQLt.Client.Net.Gateways
 
                         return reader[0] as string;
                     }
-                }
-            
+                }            
         }
 
     }

@@ -10,7 +10,7 @@ namespace MSTestExample
         /*Set the connection string to the database with your tests in*/
 
         private readonly tSQLtTestRunner _runner =
-            new tSQLtTestRunner("server=.;integrated security=sspi;initial catalog=tSQLtTests;");
+            new tSQLtTestRunner("server=.;integrated security=sspi;initial catalog=tSQLtTests;", 60 * 1000/*optional timeout, default is 2 minutes*/);
 
         /*These tests may fail, they are to demonstrate using the .net test client rather than actually passing!*/
 
