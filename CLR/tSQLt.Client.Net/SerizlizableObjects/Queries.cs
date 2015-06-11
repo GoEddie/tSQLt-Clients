@@ -12,7 +12,7 @@ namespace tSQLt.Client.Net
 
         public static string GetQueryForJustResults()
         {
-            return "exec tSQlt.XmlResultFormatter";
+            return "exec tSQLt.XmlResultFormatter";
         }
 
         public static string GetQueryForSingleTest(string testClass, string name)
