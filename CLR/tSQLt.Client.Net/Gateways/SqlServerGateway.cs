@@ -55,7 +55,20 @@ namespace tSQLt.Client.Net.Gateways
                                 string.Format("Expecting to get a data reader with the response to: \"{0}\" ", query));
                         }
 
-                        return reader[0] as string;
+                        var result =  reader[0] as string;
+                        var testCount = 0;
+                        if (Int32.TryParse(result, out testCount))
+                        {
+                            if (reader.NextResult())
+                            {
+                                if (reader.Read())
+                                {
+                                    return reader[0] as string;
+                                }
+                            }
+                        }
+
+                        return result;
                     }
                 }            
         }
