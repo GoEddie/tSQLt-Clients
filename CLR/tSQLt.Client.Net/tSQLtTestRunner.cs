@@ -108,7 +108,7 @@ namespace tSQLt.Client.Net
             return string.Format(@"<testsuites><testsuite name=""failure"" tests=""1"" errors=""1"" failures=""1""> 
                 <testcase classname=""failure"" name=""message"">              
                 <failure message=""{0}"" />
-            </testcase></testsuite></testsuites> ", WebUtility.HtmlEncode(message.Replace("\r", "").Replace("\n", "")));
+            </testcase></testsuite></testsuites> ",  message == null ? "Unknown Failure" :  WebUtility.HtmlEncode(message.Replace("\r", "").Replace("\n", "")));
 
         }
 
