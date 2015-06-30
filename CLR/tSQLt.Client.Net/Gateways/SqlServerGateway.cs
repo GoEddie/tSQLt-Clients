@@ -11,7 +11,6 @@ namespace tSQLt.Client.Net.Gateways
 
     public class SqlServerGateway : ISqlServerGateway
     {
-        
         private readonly string _connectionString;
         private readonly int _runTimeout;
 
@@ -23,42 +22,49 @@ namespace tSQLt.Client.Net.Gateways
 
         public void RunWithNoResult(string query)
         {
-
             using (var con = new SqlConnection(_connectionString))
-                {
-                    con.Open();
+            {
+                con.Open();
 
-                    using (SqlCommand cmd = con.CreateCommand())
-                    {
-                        cmd.CommandText = query;
-                        cmd.CommandTimeout = _runTimeout;
-                        cmd.ExecuteNonQuery();
-                    }
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = query;
+                    cmd.CommandTimeout = _runTimeout;
+                    cmd.ExecuteNonQuery();
                 }
+            }
         }
-        
+
         public string RunWithXmlResult(string query)
         {
             using (var con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+
+                using (var cmd = con.CreateCommand())
                 {
-                    con.Open();
+                    cmd.CommandText = query;
+                    cmd.CommandTimeout = _runTimeout;
 
-                    using (SqlCommand cmd = con.CreateCommand())
+                    var reader = cmd.ExecuteReader();
+                    if (!reader.Read())
                     {
-                        cmd.CommandText = query;
-                        cmd.CommandTimeout = _runTimeout;
-
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (!reader.Read())
-                        {
-                            throw new InvalidOperationException(
-                                string.Format("Expecting to get a data reader with the response to: \"{0}\" ", query));
-                        }
-
-                        return reader[0] as string;
+                        throw new InvalidOperationException(
+                            string.Format("Expecting to get a data reader with the response to: \"{0}\" ", query));
                     }
-                }            
-        }
 
+                    if (reader[0] is int?)
+                    {
+                        reader.NextResult();
+                        if (reader.Read())
+                        {
+                            return reader[0] as string;
+                        }
+                    }
+
+                    return reader[0] as string;
+                }
+            }
+        }
     }
 }
