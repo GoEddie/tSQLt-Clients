@@ -47,22 +47,28 @@ namespace tSQLt.Client.Net.Gateways
                     cmd.CommandTimeout = _runTimeout;
 
                     var reader = cmd.ExecuteReader();
-                    if (!reader.Read())
-                    {
-                        throw new InvalidOperationException(
-                            string.Format("Expecting to get a data reader with the response to: \"{0}\" ", query));
-                    }
 
-                    if (reader[0] is int?)
+
+
+
+                    do
                     {
-                        reader.NextResult();
-                        if (reader.Read())
+                        if (!reader.Read())
                         {
-                            return reader[0] as string;
+                            throw new InvalidOperationException(
+                                string.Format("Expecting to get a data reader with the response to: \"{0}\" ", query));
                         }
-                    }
+                        var results = reader[0] as string;
+                        if (results != null && results.Contains("testsuite"))
+                        {
+                            return results;
+                        }
 
-                    return reader[0] as string;
+                    } while (reader.NextResult());
+
+                    return null;
+
+
                 }
             }
         }
