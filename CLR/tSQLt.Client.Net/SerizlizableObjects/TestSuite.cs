@@ -37,6 +37,10 @@ namespace tSQLt.Client.Net
             {
                 if(test.Failure != null)
                     messages.AppendFormat("{0}.{1}: {2}\r\n", test.ClassName, test.Name, test.Failure.Message);
+
+                if (test.Error != null)
+                    messages.AppendFormat("{0}.{1}: {2}\r\n", test.ClassName, test.Name, test.Error.Message);
+
             }
 
             return messages.ToString();

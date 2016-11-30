@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace tSQLt.Client.Net.Gateways
 {
@@ -48,23 +49,23 @@ namespace tSQLt.Client.Net.Gateways
 
                     var reader = cmd.ExecuteReader();
 
-
-
-
-                    do
+                    var builder = new StringBuilder();
+                    
+                    while (reader.Read())
                     {
-                        if (!reader.Read())
+                        var part = reader[0] as string;
+                        if (!String.IsNullOrEmpty(part))
                         {
-                            throw new InvalidOperationException(
-                                string.Format("Expecting to get a data reader with the response to: \"{0}\" ", query));
+                            builder.Append(part);
                         }
-                        var results = reader[0] as string;
-                        if (results != null && results.Contains("testsuite"))
-                        {
-                            return results;
-                        }
+                    } 
 
-                    } while (reader.NextResult());
+                    var results = builder.ToString();
+
+                    if (results.Contains("testsuite"))
+                    {
+                        return results;
+                    }
 
                     return null;
 

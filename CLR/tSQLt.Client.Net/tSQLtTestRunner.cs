@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Net;
 using System.Web;
 using tSQLt.Client.Net.Gateways;
@@ -76,7 +77,15 @@ namespace tSQLt.Client.Net
 
             try
             {
-                _gateway.RunWithNoResult(queryRun);
+                try
+                {
+                    _gateway.RunWithNoResult(queryRun);
+                }
+                catch (SqlException)
+                {
+                    
+                }
+
                 xml = _gateway.RunWithXmlResult(queryResults);
             }
             catch (Exception ex)

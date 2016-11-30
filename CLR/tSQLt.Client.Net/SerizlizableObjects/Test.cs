@@ -15,7 +15,11 @@ namespace tSQLt.Client.Net
         public bool Failed;
         
         [XmlElement("failure")]
-       public Failure Failure;
-        
+        public Failure Failure;
+
+        [XmlElement("error")]
+        public Failure Error;
+
+
     }
 }

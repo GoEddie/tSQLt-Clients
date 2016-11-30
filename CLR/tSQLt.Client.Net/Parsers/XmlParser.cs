@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -17,6 +18,11 @@ namespace tSQLt.Client.Net.Parsers
             }
             catch (Exception ex)
             {
+                if (Debugger.IsAttached)
+                {
+                    Console.WriteLine("tSQLt Test Runner unable to deserialize xml error: {0}, xml: \r\n{1}\r\n", ex.Message, xml);
+                }
+
                 return new TestSuites()
                 {
                     Suites = new List<TestSuite>() { new TestSuite(ex.Message) }

@@ -8,4 +8,10 @@ namespace tSQLt.Client.Net
         public string Message;
 
     }
+
+    public class Error
+    {
+        [XmlAttribute("message")]
+        public string Message;
+    }
 }
