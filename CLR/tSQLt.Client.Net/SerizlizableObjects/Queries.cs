@@ -41,6 +41,23 @@ select @schema_count schema_count, @test_class_count test_class_count
 */
         }
 
+        public static string GetQueryForValidateTest(string testClass, string testName)
+        {
+//            declare @schema_name nvarchar(255) = 'abc'
+//declare @test_name nvarchar(255) = 'def'
+
+//declare @schema_count int = (select count(*) from sys.schemas where name = @schema_name);
+//declare @test_class_count int = (select count(*) from sys.extended_properties ep join sys.schemas s on ep.major_id = s.schema_id
+//    where ep.class_desc = 'SCHEMA' and ep.name = 'tSQLt.TestClass' and s.name = @schema_name);
+
+//declare @proc_count int = coalesce((select object_id(@schema_name + '.' + @test_name)), -1)
+
+
+//select @schema_count schema_count, @test_class_count test_class_count, @proc_count proc_count
+
+
+        }
+
         private static string QuoteName(string name)
         {
             if (!name.StartsWith("["))
