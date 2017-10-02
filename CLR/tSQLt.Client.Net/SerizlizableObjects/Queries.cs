@@ -29,6 +29,17 @@ namespace tSQLt.Client.Net
 
             return String.Format("exec tSQLt.RunTestClass '{0}'", testClass);
         }
+        public static string GetQueryForValidateClass(string testClass)
+        {
+            /*declare @schema_name nvarchar(255) = 'abc1'
+
+declare @schema_count int = (select count(*) from sys.schemas where name = @schema_name);
+declare @test_class_count int = (select count(*) from sys.extended_properties ep join sys.schemas s on ep.major_id = s.schema_id
+	where ep.class_desc = 'SCHEMA' and ep.name = 'tSQLt.TestClass' and s.name = @schema_name);
+
+select @schema_count schema_count, @test_class_count test_class_count
+*/
+        }
 
         private static string QuoteName(string name)
         {
