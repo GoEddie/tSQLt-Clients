@@ -49,6 +49,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerizlizableObjects\TestSuite.cs" />
     <Compile Include="SerizlizableObjects\TestSuites.cs" />
+    <Compile Include="SerizlizableObjects\StringExtensions.cs" />
+    <Compile Include="TestValidators\TestClassValidator.cs" />
     <Compile Include="tSQLtTestRunner.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
   </ItemGroup>

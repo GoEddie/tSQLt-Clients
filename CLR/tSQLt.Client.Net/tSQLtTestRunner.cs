@@ -4,12 +4,14 @@ using System.Net;
 using System.Web;
 using tSQLt.Client.Net.Gateways;
 using tSQLt.Client.Net.Parsers;
+using tSQLt.Client.Net.TestValidators;
 
 namespace tSQLt.Client.Net
 {
     public class tSQLtTestRunner
     {
         private readonly ISqlServerGateway _gateway;
+        private readonly TestClassValidator _testValidator;
 
         /// <summary>
         /// Creates a tSQLtTestRunner which is used to run tests against a Sql Server database which contains the tests to run
@@ -19,6 +21,7 @@ namespace tSQLt.Client.Net
         public tSQLtTestRunner(string connectionString, int runTimeout = 1000 * 120)
         {
             _gateway = new SqlServerGateway(connectionString, runTimeout);
+            _testValidator = new TestClassValidator(_gateway);
         }
 
         /// <summary>
@@ -28,6 +31,7 @@ namespace tSQLt.Client.Net
         public tSQLtTestRunner(ISqlServerGateway gateway /*Typically only used for testing the API*/)
         {
             _gateway = gateway;
+            _testValidator = new TestClassValidator(gateway);
         }
 
         /// <summary>
@@ -43,7 +47,12 @@ namespace tSQLt.Client.Net
         /// <param name="name">The name of the test to run</param>
         /// <returns>TestSuites - The Results of the test</returns>
         public TestSuites Run(string testClass, string name)
-        {
+        {           
+            if (!_testValidator.Validate(testClass, name))
+            {
+                return XmlParser.Get(FailureMessageXml(string.Format("The test class \"{0}\" or test name \"{1}\" could not be found or does not have the tSQLt test schema extended property", testClass, name)));
+            }
+
             return GetResults(Queries.GetQueryForSingleTest(testClass, name));
         }
 
@@ -59,6 +68,11 @@ namespace tSQLt.Client.Net
         /// <returns></returns>
         public TestSuites RunClass(string testClass)
         {
+            if (!_testValidator.Validate(testClass))
+            {
+                return XmlParser.Get(FailureMessageXml(string.Format("The test class \"{0}\" could not be found or does not have the tSQLt test schema extended property", testClass)));
+            }
+
             return GetResults(Queries.GetQueryForClass(testClass), Queries.GetQueryForJustResults());
         }
 

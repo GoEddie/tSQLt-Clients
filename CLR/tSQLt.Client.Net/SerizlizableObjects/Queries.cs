@@ -31,30 +31,31 @@ namespace tSQLt.Client.Net
         }
         public static string GetQueryForValidateClass(string testClass)
         {
-            /*declare @schema_name nvarchar(255) = 'abc1'
+            return string.Format(@"declare @schema_name nvarchar(255) = '{0}'
 
 declare @schema_count int = (select count(*) from sys.schemas where name = @schema_name);
 declare @test_class_count int = (select count(*) from sys.extended_properties ep join sys.schemas s on ep.major_id = s.schema_id
 	where ep.class_desc = 'SCHEMA' and ep.name = 'tSQLt.TestClass' and s.name = @schema_name);
 
-select @schema_count schema_count, @test_class_count test_class_count
-*/
+select @schema_count schema_count, @test_class_count test_class_count", testClass.UnQuote());
+
         }
 
         public static string GetQueryForValidateTest(string testClass, string testName)
         {
-//            declare @schema_name nvarchar(255) = 'abc'
-//declare @test_name nvarchar(255) = 'def'
+            return string.Format(@"
+            declare @schema_name nvarchar(255) = '{0}'
+declare @test_name nvarchar(255) = '{1}'
 
-//declare @schema_count int = (select count(*) from sys.schemas where name = @schema_name);
-//declare @test_class_count int = (select count(*) from sys.extended_properties ep join sys.schemas s on ep.major_id = s.schema_id
-//    where ep.class_desc = 'SCHEMA' and ep.name = 'tSQLt.TestClass' and s.name = @schema_name);
+declare @schema_count int = (select count(*) from sys.schemas where name = @schema_name);
+declare @test_class_count int = (select count(*) from sys.extended_properties ep join sys.schemas s on ep.major_id = s.schema_id
+    where ep.class_desc = 'SCHEMA' and ep.name = 'tSQLt.TestClass' and s.name = @schema_name);
 
-//declare @proc_count int = coalesce((select object_id(@schema_name + '.' + @test_name)), -1)
+declare @proc_count int = coalesce((select object_id(@schema_name + '.' + @test_name)), -1)
 
 
-//select @schema_count schema_count, @test_class_count test_class_count, @proc_count proc_count
-
+select @schema_count schema_count, @test_class_count test_class_count, @proc_count proc_count
+", testClass.UnQuote(), testName.UnQuote());
 
         }
 
