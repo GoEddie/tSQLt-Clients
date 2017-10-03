@@ -8,6 +8,14 @@ namespace tSQLt.Client.Net.Gateways
     {
         string RunWithXmlResult(string query);
         void RunWithNoResult(string query);
+        DataReaderResult RunWithDataReader(string query);
+    }
+
+    public struct DataReaderResult
+    {
+        public SqlConnection Connection;
+        public SqlCommand Command;
+        public SqlDataReader Reader;
     }
 
     public class SqlServerGateway : ISqlServerGateway
@@ -20,6 +28,22 @@ namespace tSQLt.Client.Net.Gateways
             _connectionString = connectionString;
             _runTimeout = runTimeout;
         }
+        public DataReaderResult RunWithDataReader(string query)
+        {
+            var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            var command = connection.CreateCommand();
+            command.CommandText = query;
+            command.CommandType = System.Data.CommandType.Text;
+
+            var result = new DataReaderResult();
+            result.Connection = connection;
+            result.Command = command;
+            result.Reader = command.ExecuteReader();
+            return result;
+        }
+
 
         public void RunWithNoResult(string query)
         {
@@ -50,15 +74,18 @@ namespace tSQLt.Client.Net.Gateways
                     var reader = cmd.ExecuteReader();
 
                     var builder = new StringBuilder();
-                    
-                    while (reader.Read())
+
+                    do
                     {
-                        var part = reader[0] as string;
-                        if (!String.IsNullOrEmpty(part))
+                        while (reader.Read())
                         {
-                            builder.Append(part);
+                            var part = reader[0] as string;
+                            if (!String.IsNullOrEmpty(part))
+                            {
+                                builder.Append(part);
+                            }
                         }
-                    } 
+                    } while (reader.NextResult());
 
                     var results = builder.ToString();
 
